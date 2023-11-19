@@ -1,13 +1,12 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import ConnectD from "./db";
+import Paste from "../models/paste_model";
 
-mongoose.connect('mongodb+srv://tixo:y9diHvw3GruGB4Ww@pbp.wyezxh2.mongodb.net/?retryWrites=true&w=majority')
-    .then(() => console.log('Database connected!'))
-    .catch(err => console.log(err));
 const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Hello World!');
+ConnectD()
+app.get('/', async (req, res) => {
+  const pastes = await Paste.find()
+  res.json(pastes)
 });
 
 app.listen(3000, () => {
