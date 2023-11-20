@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
  const ConnectD = async () => {
     try {
-      const conn: any = await mongoose.connect('mongodb+srv://tixo:y9diHvw3GruGB4Ww@pbp.wyezxh2.mongodb.net/?retryWrites=true&w=majority')
+      const conn: any = await mongoose.connect(process.env.DB_CONNECTION)
       console.log(`MongoDB Connected: ${conn.connection.host}`);
     } catch (error) {
       console.error(`Error: ${error.message}`);
@@ -12,4 +12,3 @@ import mongoose from 'mongoose';
 
 
 export default ConnectD
-

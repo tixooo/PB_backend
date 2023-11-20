@@ -7,6 +7,7 @@ ConnectD()
 app.get('/', async (req, res) => {
   const pastes = await Paste.find()
   res.json(pastes)
+  console.log(res.json(pastes))
 });
 
 app.listen(3000, () => {
