@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const pasteSchema = new Schema({
-    content: { type: String, required: true },
+    content: { type: JSON, required: true },
 });
 const Paste = mongoose_1.default.model('Paste', pasteSchema);
 exports.default = Paste;
