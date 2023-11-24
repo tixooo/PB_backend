@@ -2,7 +2,7 @@ import Paste from "../models/paste_model";
 import {Request, Response, NextFunction} from 'express';
 // const app = express();
 
-export const getAllPastest = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllPastes = async (req: Request, res: Response, next: NextFunction) => {
     try{
         const pastes = await Paste.find({})
         res.status(200).json(pastes)
