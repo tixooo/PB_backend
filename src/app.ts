@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 
 app.use('/', pasteRoute)
 app.use('/pastes', pasteRoute)
+app.use('/pastes', pasteRoute)
 
 app.listen(3000, () => {
   console.log('Server is running at http://localhost:3000');

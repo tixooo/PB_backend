@@ -12,10 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.userPaste = exports.getAllPosts = void 0;
+exports.deletePostByID = exports.userPaste = exports.getPasteById = exports.getAllPastes = void 0;
 const paste_model_1 = __importDefault(require("../models/paste_model"));
-// const app = express();
-const getAllPosts = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllPastes = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const pastes = yield paste_model_1.default.find({});
         res.status(200).json(pastes);
@@ -24,23 +23,20 @@ const getAllPosts = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         res.status(500).json({ message: error.message });
     }
 });
-exports.getAllPosts = getAllPosts;
-// app.get('/pastes', async (req, res) => {
-//     const pastes = await Paste.find()
-//     res.json(pastes)
-// });
-//
-// app.get('/pastes/:id', async (req, res) => {
-//     try {
-//         const paste = await Paste.findById(req.params.id);
-//         if (!paste) {
-//             return res.status(404).json({ message: 'Paste not found' });
-//         }
-//         res.json(paste);
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// });
+exports.getAllPastes = getAllPastes;
+const getPasteById = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const paste = yield paste_model_1.default.findById(req.params.id);
+        if (!paste) {
+            return res.status(404).json({ message: 'Paste not found' });
+        }
+        res.json(paste);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+exports.getPasteById = getPasteById;
 const userPaste = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const paste = new paste_model_1.default({
         content: req.body.content,
@@ -54,16 +50,18 @@ const userPaste = (req, res, next) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.userPaste = userPaste;
-// app.delete('/pastes/:id', async (req, res) => {
-//     try {
-//         const paste = await Paste.findById(req.params.id);
-//         if (!paste) {
-//             return res.status(404).json({ message: 'Paste not found' });
-//         }
-//         await paste.deleteOne();
-//         res.json({ message: 'Paste deleted' });
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-// })
+const deletePostByID = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const paste = yield paste_model_1.default.findById(req.params.id);
+        if (!paste) {
+            return res.status(404).json({ message: 'Paste not found' });
+        }
+        yield paste.deleteOne();
+        res.json({ message: 'Paste deleted' });
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+exports.deletePostByID = deletePostByID;
 //# sourceMappingURL=userPaste.js.map
